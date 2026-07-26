@@ -19,7 +19,16 @@ export function LogoHeader() {
   }, []);
 
   return (
-    <header className="flex items-center justify-between gap-4 py-[22px] pb-10 min-h-9">
+    <header
+      className="sticky top-0 z-30 flex items-center justify-between gap-4 py-[18px] mb-6 min-h-9 -mx-5 px-5"
+      style={{
+        background: "rgba(247, 244, 236, 0.85)",
+        backdropFilter: "saturate(180%) blur(20px)",
+        WebkitBackdropFilter: "saturate(180%) blur(20px)",
+        paddingTop: "calc(18px + env(safe-area-inset-top))",
+        marginTop: "calc(-1 * env(safe-area-inset-top))",
+      }}
+    >
       <Link href="/" aria-label="Avaleht" className="inline-flex items-center flex-shrink-0 active:opacity-60 transition-opacity">
         <Image
           src="/icons/logo.png"

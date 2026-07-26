@@ -19,7 +19,7 @@ export default function Home() {
           Tere tulemast
         </h1>
         <p className="mt-1.5 text-[15px] font-medium text-ink-2 tracking-tight">
-          Jumal on rahu, mitte segaduse Jumal.
+          Oled oodatud.
         </p>
       </section>
 

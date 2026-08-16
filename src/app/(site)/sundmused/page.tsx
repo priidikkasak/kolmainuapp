@@ -1,73 +1,78 @@
 import type { Metadata } from "next";
 import {
-  PageTitle,
-  Section,
   List,
   ListItem,
   NewsCompact,
+  PageTitle,
+  Section,
 } from "@/components/primitives";
+import { getHighlightEvents, getNews, getWeeklyServices } from "@/lib/content";
+import { ET_WEEKDAYS, formatDayMonth, formatRange, formatTime } from "@/lib/date";
 
 export const metadata: Metadata = {
   title: "Sündmused",
 };
 
-export default function SundmusedPage() {
+export default async function SundmusedPage() {
+  const [highlights, weekly, news] = await Promise.all([
+    getHighlightEvents(8),
+    getWeeklyServices(),
+    getNews(6),
+  ]);
+
   return (
     <>
       <PageTitle
         title="Sündmused"
-        subtitle="Erilised sündmused ja üritused Kolmainu koguduses."
+        subtitle="Erilised sündmused ja üritused koguduses."
       />
 
-      <Section label="Selle kuu tähtsündmused">
-        <div className="flex flex-col gap-2">
-          <NewsCompact
-            date="15. kuni 20. august"
-            title="Suvine leerilaager Ontikal"
-            href="#"
-          />
-          <NewsCompact
-            date="6. august"
-            title="Kammerkoori uue hooaja avaproov"
-            href="#"
-          />
-          <NewsCompact
-            date="5. august"
-            title="Kiriku katuseremont algab"
-            href="#"
-          />
-          <NewsCompact
-            date="3. august"
-            title="Nelja koguduse ühine palvusõhtu"
-            href="#"
-          />
-        </div>
-      </Section>
+      {highlights.length ? (
+        <Section label="Tähtsündmused">
+          <List>
+            {highlights.map((event) => (
+              <ListItem
+                key={event.id}
+                title={event.title}
+                meta={[formatRange(event.startsAt, event.endsAt), event.location]
+                  .filter(Boolean)
+                  .join(" · ")}
+                aside={event.endsAt ? undefined : formatTime(event.startsAt)}
+              />
+            ))}
+          </List>
+        </Section>
+      ) : null}
 
-      <Section label="Iganädalased">
-        <List>
-          <ListItem
-            title="Jumalateenistus armulauaga"
-            meta="Iga pühapäev"
-            aside="11.00"
-          />
-          <ListItem
-            title="Orelkontsert"
-            meta="Iga kolmapäev"
-            aside="18.00"
-          />
-          <ListItem
-            title="Palvusetund"
-            meta="Iga kolmapäev"
-            aside="18.00"
-          />
-          <ListItem
-            title="Kammerkoori proov"
-            meta="Iga neljapäev"
-            aside="19.00"
-          />
-        </List>
-      </Section>
+      {weekly.length ? (
+        <Section label="Iganädalased">
+          <List>
+            {weekly.map((service) => (
+              <ListItem
+                key={service.id}
+                title={service.title}
+                meta={service.meta ?? `Iga ${ET_WEEKDAYS[service.weekday].toLowerCase()}`}
+                aside={service.time ?? undefined}
+              />
+            ))}
+          </List>
+        </Section>
+      ) : null}
+
+      {news.length ? (
+        <Section label="Teated">
+          <div className="flex flex-col gap-2">
+            {news.map((item) => (
+              <NewsCompact
+                key={item.id}
+                date={formatDayMonth(item.publishedAt)}
+                title={item.title}
+                href={item.href ?? undefined}
+              />
+            ))}
+          </div>
+        </Section>
+      ) : null}
 
       <Section>
         <List>

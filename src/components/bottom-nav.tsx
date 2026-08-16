@@ -61,7 +61,7 @@ const items = [
   },
 ];
 
-export function BottomNav() {
+export function BottomNav({ background }: { background: string }) {
   const pathname = usePathname();
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -70,7 +70,7 @@ export function BottomNav() {
     <nav
       className="fixed bottom-0 left-0 right-0 z-10 border-t border-line"
       style={{
-        background: "rgba(247, 244, 236, 0.85)",
+        background,
         backdropFilter: "saturate(180%) blur(20px)",
         WebkitBackdropFilter: "saturate(180%) blur(20px)",
         paddingBottom: "env(safe-area-inset-bottom)",

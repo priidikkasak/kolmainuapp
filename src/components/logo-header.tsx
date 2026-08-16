@@ -11,7 +11,15 @@ function formatDate(d: Date) {
   return `${DAYS[d.getDay()]}, ${d.getDate()}. ${MONTHS[d.getMonth()]}`;
 }
 
-export function LogoHeader() {
+export function LogoHeader({
+  logoUrl,
+  name,
+  background,
+}: {
+  logoUrl: string;
+  name: string;
+  background: string;
+}) {
   const [date, setDate] = useState("");
 
   useEffect(() => {
@@ -22,7 +30,7 @@ export function LogoHeader() {
     <header
       className="sticky top-0 z-30 flex items-center justify-between gap-4 py-[18px] mb-6 min-h-9 -mx-5 px-5"
       style={{
-        background: "rgba(247, 244, 236, 0.85)",
+        background,
         backdropFilter: "saturate(180%) blur(20px)",
         WebkitBackdropFilter: "saturate(180%) blur(20px)",
         paddingTop: "calc(18px + env(safe-area-inset-top))",
@@ -31,11 +39,12 @@ export function LogoHeader() {
     >
       <Link href="/" aria-label="Avaleht" className="inline-flex items-center flex-shrink-0 active:opacity-60 transition-opacity">
         <Image
-          src="/icons/logo.png"
-          alt="Kolmainu"
+          src={logoUrl}
+          alt={name}
           width={190}
           height={30}
           priority
+          unoptimized={logoUrl.startsWith("http")}
           className="h-[30px] w-auto max-w-[190px] object-contain"
         />
       </Link>

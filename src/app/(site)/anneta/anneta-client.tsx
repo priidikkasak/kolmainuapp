@@ -1,20 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import {
-  PageTitle,
-  Section,
-  Info,
-  InfoRow,
-} from "@/components/primitives";
+import { Info, InfoRow, PageTitle, Section } from "@/components/primitives";
 
 const presets = [5, 10, 25, 50, 100] as const;
 type Preset = (typeof presets)[number];
 type Selection = Preset | "other";
 
-export default function AnnetaClient() {
+export default function AnnetaClient({
+  title,
+  subtitle,
+  iban,
+  owner,
+  reference,
+}: {
+  title: string;
+  subtitle: string;
+  iban: string | null;
+  owner: string;
+  reference: string;
+}) {
   const [selected, setSelected] = useState<Selection>(10);
   const [customAmount, setCustomAmount] = useState<number | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const displayAmount =
     selected === "other" && customAmount != null ? customAmount : selected;
@@ -27,13 +35,20 @@ export default function AnnetaClient() {
     }
   };
 
-  const handleDonate = () => {
-    window.alert("Prototüüp. Makseintegratsioon tuleb järgmises versioonis.");
+  const copyIban = async () => {
+    if (!iban) return;
+    try {
+      await navigator.clipboard.writeText(iban.replace(/\s/g, ""));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
   };
 
   return (
     <>
-      <PageTitle title="Anneta" subtitle="Toeta koguduse tööd. Iga panus loeb." />
+      <PageTitle title={title} subtitle={subtitle} />
 
       <Section label="Summa">
         <div className="grid grid-cols-3 gap-2">
@@ -59,28 +74,30 @@ export default function AnnetaClient() {
               selected === "other" ? "ring-2 ring-ink ring-inset" : "ring-0"
             }`}
           >
-            {selected === "other" && customAmount != null
-              ? `${customAmount} €`
-              : "Muu"}
+            {selected === "other" && customAmount != null ? `${customAmount} €` : "Muu"}
           </button>
         </div>
       </Section>
 
-      <button
-        type="button"
-        onClick={handleDonate}
-        className="mt-6 w-full bg-ink text-white rounded-[14px] py-4 text-[16px] font-semibold tracking-tight transition-transform active:scale-[0.99]"
-      >
-        Anneta <span>{displayAmount} €</span>
-      </button>
+      {iban ? (
+        <button
+          type="button"
+          onClick={copyIban}
+          className="mt-6 w-full bg-ink text-white rounded-[14px] py-4 text-[16px] font-semibold tracking-tight transition-transform active:scale-[0.99]"
+        >
+          {copied ? "Konto kopeeritud" : `Kopeeri konto · ${displayAmount} €`}
+        </button>
+      ) : null}
 
       <Section label="Ülekanne">
         <Info>
-          <InfoRow label="Konto" variant="account">
-            EE23 1010 2200 4587 5006
-          </InfoRow>
-          <InfoRow label="Saaja">Kolmainu kogudus</InfoRow>
-          <InfoRow label="Selgitus">Annetus</InfoRow>
+          {iban ? (
+            <InfoRow label="Konto" variant="account">
+              {iban}
+            </InfoRow>
+          ) : null}
+          <InfoRow label="Saaja">{owner}</InfoRow>
+          <InfoRow label="Selgitus">{reference}</InfoRow>
         </Info>
       </Section>
     </>

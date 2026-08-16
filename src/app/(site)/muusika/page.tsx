@@ -1,76 +1,35 @@
 import type { Metadata } from "next";
-import {
-  PageTitle,
-  Section,
-  List,
-  ListItem,
-  Info,
-  InfoRow,
-  Prose,
-} from "@/components/primitives";
+import { notFound } from "next/navigation";
+import { PageBody } from "@/components/page-sections";
+import { List, ListItem, Section } from "@/components/primitives";
+import { getPage, getUpcomingEvents } from "@/lib/content";
+import { formatLongDate, formatTime } from "@/lib/date";
 
 export const metadata: Metadata = {
   title: "Muusika",
 };
 
-export default function MuusikaPage() {
+export default async function MuusikaPage() {
+  const [page, events] = await Promise.all([getPage("muusika"), getUpcomingEvents(60)]);
+  if (!page) notFound();
+  const concerts = events.filter((e) => e.kind === "koor").slice(0, 6);
+
   return (
-    <>
-      <PageTitle title="Muusika" subtitle="Koor, orel ja koguduse muusikaelu." />
-
-      <Section label="Tulevad kontserdid">
-        <List>
-          <ListItem
-            title="Orelkontsert"
-            meta="Kolmapäev, 29. juuli · Andres Uibo"
-            aside="18.00"
-          />
-          <ListItem
-            title="Orelkontsert"
-            meta="Kolmapäev, 5. august · Ines Maidre"
-            aside="18.00"
-          />
-          <ListItem
-            title="Suvine korikontsert"
-            meta="Laupäev, 15. august · Kolmainu kammerkoor"
-            aside="19.00"
-          />
-        </List>
-      </Section>
-
-      <Section label="Kammerkoor">
-        <Prose>
-          <p>
-            Kolmainu kammerkoor teenib jumalateenistustel ja esineb
-            kontsertidel. Uued lauljad on alati oodatud. Eelnevat kogemust ei
-            nõuta.
-          </p>
-        </Prose>
-        <div className="mt-4">
-          <Info>
-            <InfoRow label="Proovid">Neljapäeviti 19.00 kuni 21.00</InfoRow>
-            <InfoRow label="Uus hooaeg">Algab 6. augustil</InfoRow>
-            <InfoRow label="Kontakt">
-              <a href="mailto:koor@kolmainu.ee">koor@kolmainu.ee</a>
-            </InfoRow>
-          </Info>
-        </div>
-      </Section>
-
-      <Section label="Kirikuorel">
-        <Prose>
-          <p>
-            Kolmainu kiriku orel on ehitatud 1902. aastal Sauer&apos;i firma
-            poolt Frankfurdis. Instrument on üks Rakvere paremini säilinud
-            ajaloolisi oreleid ning meelitab kokku külalisorganiste kogu
-            Eestist.
-          </p>
-          <p>
-            Iga kolmapäev kell 18.00 toimub tasuta orelkontsert, mõtisklushetk
-            keset nädalat.
-          </p>
-        </Prose>
-      </Section>
-    </>
+    <PageBody page={page}>
+      {concerts.length ? (
+        <Section label="Tulevad kontserdid">
+          <List>
+            {concerts.map((event) => (
+              <ListItem
+                key={event.id}
+                title={event.title}
+                meta={[formatLongDate(event.startsAt), event.meta].filter(Boolean).join(" · ")}
+                aside={formatTime(event.startsAt)}
+              />
+            ))}
+          </List>
+        </Section>
+      ) : null}
+    </PageBody>
   );
 }

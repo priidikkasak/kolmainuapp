@@ -1,85 +1,64 @@
 import type { Metadata } from "next";
-import {
-  PageTitle,
-  Section,
-  List,
-  ListItem,
-  Verse,
-} from "@/components/primitives";
+import { List, ListItem, PageTitle, Section, Verse } from "@/components/primitives";
+import { getSermons, getVerseOfDay } from "@/lib/content";
+import { formatDayMonth } from "@/lib/date";
 
 export const metadata: Metadata = {
   title: "Jutlused",
 };
 
-export default function JutlusedPage() {
+export default async function JutlusedPage() {
+  const [sermons, verse] = await Promise.all([getSermons(20), getVerseOfDay()]);
+  const recent = sermons.slice(0, 5);
+  const archive = sermons.slice(5);
+
   return (
     <>
       <PageTitle title="Jutlused" subtitle="Kuula ja loe koguduse jutlusi." />
 
-      <Section label="Viimased jutlused">
-        <List>
-          <ListItem
-            title="Vaikimise õnnistus"
-            meta="19. juuli, õp. Tauno Toompuu"
-            aside="18 min"
-            href="#"
-          />
-          <ListItem
-            title="Halastuse teekond"
-            meta="12. juuli, õp. Tauno Toompuu"
-            aside="22 min"
-            href="#"
-          />
-          <ListItem
-            title="Hea karjase kutse"
-            meta="5. juuli, õp. Tauno Toompuu"
-            aside="20 min"
-            href="#"
-          />
-          <ListItem
-            title="Rõõmust andmisest"
-            meta="28. juuni, õp. Tauno Toompuu"
-            aside="16 min"
-            href="#"
-          />
-          <ListItem
-            title="Uskuda, armastada, teenida"
-            meta="21. juuni, õp. Tauno Toompuu"
-            aside="24 min"
-            href="#"
-          />
-        </List>
-      </Section>
+      {recent.length ? (
+        <Section label="Viimased jutlused">
+          <List>
+            {recent.map((sermon) => (
+              <ListItem
+                key={sermon.id}
+                title={sermon.title}
+                meta={[formatDayMonth(sermon.preachedAt), sermon.preacher]
+                  .filter(Boolean)
+                  .join(", ")}
+                aside={sermon.durationMin ? `${sermon.durationMin} min` : undefined}
+                href={sermon.audioUrl ?? undefined}
+              />
+            ))}
+          </List>
+        </Section>
+      ) : null}
 
-      <Section label="Kuula uuesti">
-        <List>
-          <ListItem
-            title="Nelipühi jutlus"
-            meta="Kirjakoht: Ap. teod 2:1-13"
-            aside="26 min"
-            href="#"
-          />
-          <ListItem
-            title="Ülestõusmispüha"
-            meta="Kirjakoht: Markuse 16:1-8"
-            aside="28 min"
-            href="#"
-          />
-          <ListItem
-            title="Suur reede"
-            meta="Kirjakoht: Johannese 19:16-37"
-            aside="30 min"
-            href="#"
-          />
-        </List>
-      </Section>
+      {archive.length ? (
+        <Section label="Kuula uuesti">
+          <List>
+            {archive.map((sermon) => (
+              <ListItem
+                key={sermon.id}
+                title={sermon.title}
+                meta={sermon.scripture ? `Kirjakoht: ${sermon.scripture}` : undefined}
+                aside={sermon.durationMin ? `${sermon.durationMin} min` : undefined}
+                href={sermon.audioUrl ?? undefined}
+              />
+            ))}
+          </List>
+        </Section>
+      ) : null}
 
-      <Section label="Kirjakoht päevaks">
-        <Verse
-          text="Vaikige ja teadke, et mina olen Jumal."
-          reference="Psalm 46:11"
-        />
-      </Section>
+      {verse ? (
+        <Section label="Kirjakoht päevaks">
+          <Verse
+            text={verse.text}
+            reference={verse.reference}
+            bg={verse.imageUrl ?? "/images/verse-bg.jpg"}
+          />
+        </Section>
+      ) : null}
     </>
   );
 }

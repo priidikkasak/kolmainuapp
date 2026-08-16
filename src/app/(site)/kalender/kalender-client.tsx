@@ -1,104 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { PageTitle, List, ListItem } from "@/components/primitives";
+import { List, ListItem, PageTitle } from "@/components/primitives";
+import type { EventKind } from "@/lib/content-types";
 
-type EventType = "teenistus" | "palvus" | "koor" | "noored";
-type Filter = "all" | EventType;
+type Filter = "all" | EventKind;
 
-type CalEvent = {
+export type CalEvent = {
+  id: string;
   title: string;
-  meta?: string;
-  aside?: string;
-  type: EventType;
+  meta: string | null;
+  aside: string | null;
+  kind: EventKind;
 };
 
-type CalGroup = {
+export type CalGroup = {
+  key: string;
   date: string;
   weekday: string;
   events: CalEvent[];
 };
-
-const groups: CalGroup[] = [
-  {
-    date: "26. juuli",
-    weekday: "Pühapäev",
-    events: [
-      {
-        title: "Jumalateenistus armulauaga",
-        meta: "Kirikusaal, Tauno Toompuu",
-        aside: "11.00",
-        type: "teenistus",
-      },
-      {
-        title: "Noorteõhtu",
-        meta: "Kogudusesaalis",
-        aside: "17.00",
-        type: "noored",
-      },
-    ],
-  },
-  {
-    date: "29. juuli",
-    weekday: "Kolmapäev",
-    events: [
-      {
-        title: "Palvusetund",
-        meta: "Vaikimine ja palve altari ees",
-        aside: "18.00",
-        type: "palvus",
-      },
-    ],
-  },
-  {
-    date: "2. august",
-    weekday: "Pühapäev",
-    events: [
-      {
-        title: "Jumalateenistus",
-        meta: "Kirikusaal, Tauno Toompuu",
-        aside: "11.00",
-        type: "teenistus",
-      },
-    ],
-  },
-  {
-    date: "6. august",
-    weekday: "Neljapäev",
-    events: [
-      {
-        title: "Kammerkoori proov",
-        meta: "Kogudusesaalis, uus hooaeg",
-        aside: "19.00",
-        type: "koor",
-      },
-    ],
-  },
-  {
-    date: "9. august",
-    weekday: "Pühapäev",
-    events: [
-      {
-        title: "Jumalateenistus armulauaga",
-        meta: "Kirikusaal, Tauno Toompuu",
-        aside: "11.00",
-        type: "teenistus",
-      },
-    ],
-  },
-  {
-    date: "15. kuni 20. august",
-    weekday: "Laager",
-    events: [
-      {
-        title: "Suvine leerilaager",
-        meta: "Ontikal, registreerimine 15. augustini",
-        aside: "6 päeva",
-        type: "noored",
-      },
-    ],
-  },
-];
 
 const filters: { key: Filter; label: string }[] = [
   { key: "all", label: "Kõik" },
@@ -108,20 +29,25 @@ const filters: { key: Filter; label: string }[] = [
   { key: "noored", label: "Noortele" },
 ];
 
-export default function KalenderClient() {
+export default function KalenderClient({
+  groups,
+  subtitle,
+}: {
+  groups: CalGroup[];
+  subtitle: string;
+}) {
   const [active, setActive] = useState<Filter>("all");
 
   const visibleGroups = groups
     .map((g) => ({
       ...g,
-      events:
-        active === "all" ? g.events : g.events.filter((e) => e.type === active),
+      events: active === "all" ? g.events : g.events.filter((e) => e.kind === active),
     }))
     .filter((g) => g.events.length > 0);
 
   return (
     <>
-      <PageTitle title="Kalender" subtitle="Juuli ja august 2026" />
+      <PageTitle title="Kalender" subtitle={subtitle} />
 
       <div className="flex border-b border-line -mx-1">
         {filters.map((f) => {
@@ -143,23 +69,25 @@ export default function KalenderClient() {
         })}
       </div>
 
+      {visibleGroups.length === 0 ? (
+        <p className="pt-10 text-[15px] text-ink-3">Selles vaates pole sündmusi.</p>
+      ) : null}
+
       {visibleGroups.map((group) => (
-        <section key={group.date} className="pt-8">
+        <section key={group.key} className="pt-8">
           <div className="flex items-baseline justify-between mb-3.5">
             <span className="text-[17px] font-semibold text-ink tracking-[-0.02em]">
               {group.date}
             </span>
-            <span className="text-[13px] font-medium text-ink-3">
-              {group.weekday}
-            </span>
+            <span className="text-[13px] font-medium text-ink-3">{group.weekday}</span>
           </div>
           <List>
             {group.events.map((e) => (
               <ListItem
-                key={e.title + (e.aside ?? "")}
+                key={e.id}
                 title={e.title}
-                meta={e.meta}
-                aside={e.aside}
+                meta={e.meta ?? undefined}
+                aside={e.aside ?? undefined}
               />
             ))}
           </List>

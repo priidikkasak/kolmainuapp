@@ -96,11 +96,6 @@ function toSiteEvent(r: typeof events.$inferSelect): SiteEvent {
   };
 }
 
-export const getNextEvent = cache(async (): Promise<SiteEvent | null> => {
-  const upcoming = await getUpcomingEvents(5);
-  return upcoming.find((e) => e.kind === "teenistus") ?? upcoming[0] ?? null;
-});
-
 export const getHighlightEvents = cache(async (limit = 6): Promise<SiteEvent[]> => {
   const upcoming = await getUpcomingEvents(60);
   return upcoming.filter((e) => e.highlight).slice(0, limit);

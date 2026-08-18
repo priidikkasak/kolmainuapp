@@ -54,7 +54,7 @@ export const seedConfig: SiteConfig = {
     addressOffice: "Pikk 21, 44311 Rakvere",
     mapsUrl: "https://maps.google.com/?q=Kolmainu+kirik+Rakvere",
     facebook: "Kolmainu kirik",
-    instagram: "@kolmainu.rakvere",
+    instagram: "https://www.instagram.com/rakvere_kolmainu/",
     website: "https://kolmainu.ee",
     iban: "EE23 1010 2200 4587 5006",
     ibanOwner: "Kolmainu kogudus",

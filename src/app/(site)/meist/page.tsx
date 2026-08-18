@@ -9,6 +9,20 @@ export const metadata: Metadata = {
   title: "Kogudus",
 };
 
+/** A social field holds either a plain name or a full profile URL; only the URL links out. */
+function socialValue(value: string) {
+  if (!/^https?:\/\//.test(value)) return value;
+  const clean = value.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+  const handle = clean.startsWith("instagram.com/")
+    ? `@${clean.slice("instagram.com/".length)}`
+    : clean.replace(/^facebook\.com\//, "");
+  return (
+    <a href={value} target="_blank" rel="noopener">
+      {handle}
+    </a>
+  );
+}
+
 export default async function MeistPage() {
   const [page, site] = await Promise.all([getPage("meist"), getSiteConfig()]);
   if (!page) notFound();
@@ -73,8 +87,12 @@ export default async function MeistPage() {
       {contact.facebook || contact.instagram || contact.website ? (
         <Section label="Sotsiaalmeedia">
           <Info>
-            {contact.facebook ? <InfoRow label="Facebook">{contact.facebook}</InfoRow> : null}
-            {contact.instagram ? <InfoRow label="Instagram">{contact.instagram}</InfoRow> : null}
+            {contact.facebook ? (
+              <InfoRow label="Facebook">{socialValue(contact.facebook)}</InfoRow>
+            ) : null}
+            {contact.instagram ? (
+              <InfoRow label="Instagram">{socialValue(contact.instagram)}</InfoRow>
+            ) : null}
             {contact.website ? (
               <InfoRow label="Koduleht">
                 <a href={contact.website} target="_blank" rel="noopener">

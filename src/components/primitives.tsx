@@ -106,7 +106,7 @@ export function InfoRow({
     <div className="grid grid-cols-[64px_1fr] items-baseline gap-3 px-[18px] py-[18px] bg-surface rounded-[14px]">
       <div className="text-[13px] font-medium text-ink-3 tracking-tight">{label}</div>
       <div
-        className={`min-w-0 text-[15px] font-medium text-ink leading-[1.5] [overflow-wrap:anywhere] ${
+        className={`min-w-0 text-[15px] font-medium text-ink leading-[1.5] [overflow-wrap:anywhere] [&_a]:underline [&_a]:decoration-line-strong [&_a]:decoration-2 [&_a]:underline-offset-[5px] [&_a]:transition-opacity [&_a]:active:opacity-60 [&_a[target='_blank']]:after:content-['_↗'] [&_a[target='_blank']]:after:text-ink-3 ${
           variant === "account" ? "text-[13px] tabular-nums tracking-tight" : ""
         }`}
       >

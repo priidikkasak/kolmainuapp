@@ -5,8 +5,15 @@ import { getHomeTiles } from "@/lib/content";
 export default async function Home() {
   const tiles = await getHomeTiles();
 
+  // 90px header block + 116px layout bottom padding: what is left is the CTA's to fill.
   return (
-    <>
+    <div
+      className="flex flex-col"
+      style={{
+        minHeight:
+          "calc(100dvh - 90px - 116px - env(safe-area-inset-top) - env(safe-area-inset-bottom))",
+      }}
+    >
       <div className="grid grid-cols-2 gap-2.5">
         {tiles.map((tile, i) => (
           <BentoTile
@@ -22,12 +29,12 @@ export default async function Home() {
       <Link
         href="/anneta"
         prefetch
-        className="mt-2.5 flex min-h-[58px] w-full items-center justify-center gap-2.5 rounded-[22px] bg-ink px-5 text-[17px] font-semibold tracking-tight text-bg shadow-[0_8px_22px_-8px_rgba(13,11,8,0.55)] transition-transform active:scale-[0.98]"
+        className="mt-2.5 flex w-full flex-1 min-h-[72px] items-center justify-center gap-2.5 rounded-[22px] bg-ink px-5 text-[18px] font-semibold tracking-tight text-bg shadow-[0_8px_22px_-8px_rgba(13,11,8,0.55)] transition-transform active:scale-[0.98]"
       >
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
-          className="h-[20px] w-[20px]"
+          className="h-[21px] w-[21px]"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.8"
@@ -38,6 +45,6 @@ export default async function Home() {
         </svg>
         Anneta
       </Link>
-    </>
+    </div>
   );
 }

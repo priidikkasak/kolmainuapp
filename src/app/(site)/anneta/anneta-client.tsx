@@ -153,7 +153,7 @@ export default function AnnetaClient({
           onClick={copyIban}
           className="mt-6 w-full bg-ink text-white rounded-[14px] py-4 text-[16px] font-semibold tracking-tight transition-transform active:scale-[0.99]"
         >
-          {copied ? "Konto kopeeritud" : `Kopeeri konto · ${displayAmount} €`}
+          {copied ? "Konto kopeeritud" : `Anneta ${displayAmount} €`}
         </button>
       ) : null}
 

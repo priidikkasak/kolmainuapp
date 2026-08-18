@@ -57,8 +57,6 @@ async function main() {
         tagline: seedConfig.tagline,
         description: seedConfig.description,
         logoUrl: seedConfig.logoUrl,
-        homeTitle: seedConfig.homeTitle,
-        homeSubtitle: seedConfig.homeSubtitle,
         theme: seedConfig.theme,
         contact: seedConfig.contact,
       })

@@ -245,7 +245,6 @@ export const RESOURCES: Resource[] = [
     meta: (r) => String(r.href),
     fields: [
       { name: "label", label: "Pealkiri", type: "text", required: true },
-      { name: "sublabel", label: "Alapealkiri", type: "text" },
       { name: "href", label: "Link", type: "text", required: true, placeholder: "/sundmused" },
       { name: "imageUrl", label: "Pilt", type: "image" },
       { name: "sortOrder", label: "Järjekord", type: "number" },

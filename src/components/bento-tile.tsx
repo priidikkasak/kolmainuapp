@@ -5,13 +5,11 @@ export function BentoTile({
   href,
   image,
   label,
-  sublabel,
   priority = false,
 }: {
   href: string;
   image: string;
   label: string;
-  sublabel: string;
   priority?: boolean;
 }) {
   return (
@@ -35,9 +33,6 @@ export function BentoTile({
           style={{ textShadow: "0 1px 12px rgba(0,0,0,0.3)" }}
         >
           {label}
-        </div>
-        <div className="mt-0.5 text-[11px] font-medium tracking-tight text-white/70">
-          {sublabel}
         </div>
       </div>
     </Link>

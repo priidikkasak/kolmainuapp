@@ -12,7 +12,6 @@ export default async function Home() {
           href={tile.href}
           image={tile.imageUrl ?? "/images/galerii.jpg"}
           label={tile.label}
-          sublabel={tile.sublabel ?? ""}
           priority={i < 4}
         />
       ))}

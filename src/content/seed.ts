@@ -64,10 +64,8 @@ export const seedConfig: SiteConfig = {
 export const seedHomeTiles: HomeTile[] = [
   { id: "t1", href: "/kalender", label: "Kalender", sublabel: "Teenistused ja sündmused", imageUrl: "/images/sundmused.jpg" },
   { id: "t2", href: "/jutlused", label: "Jutlused", sublabel: "Kuula ja loe", imageUrl: "/images/jutlused.jpg" },
-  { id: "t3", href: "/muusika", label: "Muusika", sublabel: "Koor ja orelkontserdid", imageUrl: "/images/muusika.jpg" },
   { id: "t4", href: "/kogukond", label: "Kogukonnamaja", sublabel: "Hoolekanne ja tugi", imageUrl: "/images/kogukond.jpg" },
   { id: "t5", href: "/anneta", label: "Anneta", sublabel: "Toeta koguduse tööd", imageUrl: "/images/anneta.jpg" },
-  { id: "t6", href: "/galerii", label: "Galerii", sublabel: "Fotod ja hetked", imageUrl: "/images/galerii.jpg" },
 ];
 
 export const seedWeeklyServices: WeeklyService[] = [

@@ -56,8 +56,8 @@ export const seedConfig: SiteConfig = {
     facebook: "https://www.facebook.com/kolmainu/",
     instagram: "https://www.instagram.com/rakvere_kolmainu/",
     website: "https://kolmainu.ee",
-    iban: "EE23 1010 2200 4587 5006",
-    ibanOwner: "Kolmainu kogudus",
+    iban: "EE64 1010 5020 0126 9008",
+    ibanOwner: "Eesti Evangeelse Luterliku Kiriku Rakvere Kolmainu Kogudus",
     ibanReference: "Annetus",
   },
 };

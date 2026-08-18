@@ -441,7 +441,7 @@ export const seedPages: SitePage[] = [
   {
     slug: "piibel",
     title: "Piibel",
-    subtitle: "Kirjakoht päevaks ja igapäevane lugemine.",
+    subtitle: "Üks salm päevaks ja juhatus, kust edasi lugeda.",
     intro: null,
     sections: [
       {

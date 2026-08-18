@@ -12,7 +12,7 @@ export default async function IgapaevaeluPage() {
 
   return (
     <>
-      <PageTitle title="Hetked koguduse elust" />
+      <PageTitle title="Hetked koguduse elust" subtitle="Pildid koguduse nädalast - teenistused, kohtumised ja vaikne argipäev." />
       {photos.length ? (
         <GalleryClient groups={[{ title: "", count: photos.length, photos }]} />
       ) : (

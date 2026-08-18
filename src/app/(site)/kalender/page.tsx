@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getUpcomingEvents } from "@/lib/content";
 import {
-  ET_MONTHS,
   formatDayCount,
   formatDayMonth,
   formatRange,
@@ -43,15 +42,9 @@ export default async function KalenderPage() {
     });
   }
 
-  const months = Array.from(
-    new Set(events.map((e) => zoned(e.startsAt).month))
-  ).slice(0, 2);
-  const year = events.length ? zoned(events[0].startsAt).year : new Date().getFullYear();
-  const subtitle = months.length
-    ? `${months.map((m) => ET_MONTHS[m - 1]).join(" ja ")} ${year}`.replace(/^./, (c) =>
-        c.toUpperCase()
-      )
-    : "Tulevased sündmused";
+  const subtitle = groups.length
+    ? "Tulevased teenistused ja sündmused"
+    : "Uued sündmused lisanduvad peagi";
 
   return <KalenderClient groups={groups} subtitle={subtitle} />;
 }

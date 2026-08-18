@@ -65,7 +65,7 @@ export const seedHomeTiles: HomeTile[] = [
   { id: "t1", href: "/kalender", label: "Kalender", sublabel: "Teenistused ja sündmused", imageUrl: "/images/sundmused.jpg" },
   { id: "t2", href: "/jutlused", label: "Jutlused", sublabel: "Kuula ja loe", imageUrl: "/images/jutlused.jpg" },
   { id: "t4", href: "/kogukond", label: "Kogukonnamaja", sublabel: "Hoolekanne ja tugi", imageUrl: "/images/kogukond.jpg" },
-  { id: "t5", href: "/anneta", label: "Anneta", sublabel: "Toeta koguduse tööd", imageUrl: "/images/anneta.jpg" },
+  { id: "t5", href: "/meditatsioon", label: "Meditatsioon", sublabel: "Vaikus ja palve", imageUrl: "/images/talitused.jpg" },
 ];
 
 export const seedWeeklyServices: WeeklyService[] = [
@@ -236,6 +236,36 @@ export const seedGallery: GalleryGroup[] = galleryCategories.map((cat) => ({
 }));
 
 export const seedPages: SitePage[] = [
+  {
+    slug: "meditatsioon",
+    title: "Meditatsioon",
+    subtitle: "Vaikuse ja palve hetked kiriku rüpes.",
+    intro:
+      "Meditatsioon on aja andmine iseendale ja Jumalale. Ei ole vaja oskusi ega ettevalmistust — tule nii, nagu oled, ja jää hetkeks vaikseks.\n\nKirik on argipäeviti avatud vaikseks palveks. Altari ees põleb küünal ja igaüks võib istuda nii kaua, kui vaja.",
+    sections: [
+      {
+        id: "med-hetked",
+        label: "Ühised hetked",
+        kind: "info",
+        body: null,
+        anchor: null,
+        items: [
+          { id: "mh1", title: "Vaikne palvus", meta: "Kirikusaalis, altari ees", aside: "K 18.00", href: null },
+          { id: "mh2", title: "Hingepalve", meta: "Koos õpetajaga", aside: "N 17.00", href: null },
+          { id: "mh3", title: "Avatud kirik", meta: "Isiklikuks vaikuseks", aside: "T-R 10-16", href: null },
+        ],
+      },
+      {
+        id: "med-juhend",
+        label: "Kuidas alustada",
+        kind: "prose",
+        anchor: null,
+        body:
+          "Istu mugavalt, lase õlgadel langeda ja hinga paar korda sügavalt sisse ning välja. Sulge silmad või vaata ühte punkti — küünlaleeki, risti, akent.\n\nVali üks lühike lause, mida kordad vaikselt: \"Issand, halasta\" või \"Sina oled minuga\". Kui mõtted rändavad, too end lauseni tagasi. Alusta viiest minutist ja pikenda nii, nagu tundub loomulik.",
+        items: [],
+      },
+    ],
+  },
   {
     slug: "meist",
     title: "Kogudus",

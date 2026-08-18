@@ -9,6 +9,17 @@ export const metadata: Metadata = {
   title: "Kogudus",
 };
 
+function ExternalValue({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="noopener">
+      {children}
+      <span aria-hidden="true" className="ml-1 text-[12px] text-ink-3 no-underline">
+        ↗
+      </span>
+    </a>
+  );
+}
+
 /** A social field holds either a plain name or a full profile URL; only the URL links out. */
 function socialValue(value: string) {
   if (!/^https?:\/\//.test(value)) return value;
@@ -16,11 +27,7 @@ function socialValue(value: string) {
   const handle = clean.startsWith("instagram.com/")
     ? `@${clean.slice("instagram.com/".length)}`
     : clean.replace(/^facebook\.com\//, "");
-  return (
-    <a href={value} target="_blank" rel="noopener">
-      {handle}
-    </a>
-  );
+  return <ExternalValue href={value}>{handle}</ExternalValue>;
 }
 
 export default async function MeistPage() {
@@ -95,9 +102,9 @@ export default async function MeistPage() {
             ) : null}
             {contact.website ? (
               <InfoRow label="Koduleht">
-                <a href={contact.website} target="_blank" rel="noopener">
+                <ExternalValue href={contact.website}>
                   {contact.website.replace(/^https?:\/\//, "")}
-                </a>
+                </ExternalValue>
               </InfoRow>
             ) : null}
           </Info>

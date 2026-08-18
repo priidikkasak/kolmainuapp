@@ -81,10 +81,13 @@
 }
 
 html, body {
-  overflow-x: hidden;
   overscroll-behavior: none;
-  max-width: 100vw;
   background: var(--bg);
+}
+
+/* clip, never hidden: overflow-x:hidden on the root stops wheel/touch scrolling in Chrome */
+html {
+  overflow-x: clip;
 }
 
 body {

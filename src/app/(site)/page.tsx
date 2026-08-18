@@ -29,7 +29,7 @@ export default async function Home() {
       <Link
         href="/anneta"
         prefetch
-        className="mt-2.5 flex w-full flex-1 min-h-[72px] items-center justify-center gap-2.5 rounded-[22px] bg-ink px-5 text-[18px] font-semibold tracking-tight text-bg shadow-[0_8px_22px_-8px_rgba(13,11,8,0.55)] transition-transform active:scale-[0.98]"
+        className="mt-2.5 flex w-full flex-1 min-h-[72px] items-center justify-center gap-2.5 rounded-[22px] border-[3px] border-ink px-5 text-[18px] font-semibold tracking-tight text-ink transition-transform active:scale-[0.98]"
       >
         <svg
           viewBox="0 0 24 24"

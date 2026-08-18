@@ -69,7 +69,7 @@ function FieldInput({
     case "ref":
       control = (
         <select {...common} defaultValue={String(value)}>
-          <option value="">— vali —</option>
+          <option value="">- vali -</option>
           {field.options?.map((o) => (
             <option key={o.value} value={o.value}>
               {o.label}

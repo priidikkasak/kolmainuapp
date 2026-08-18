@@ -15,7 +15,7 @@ function secret() {
   const value = process.env.AUTH_SECRET;
   if (!value) {
     if (process.env.NODE_ENV === "production") {
-      throw new Error("AUTH_SECRET puudub — sisselogimine on välja lülitatud.");
+      throw new Error("AUTH_SECRET puudub - sisselogimine on välja lülitatud.");
     }
     return new TextEncoder().encode("kolmainu-dev-secret-not-for-production");
   }

@@ -44,7 +44,7 @@ export const seedConfig: SiteConfig = {
   name: "EELK Rakvere Kolmainu kogudus",
   shortName: "Kolmainu",
   tagline: "Oled oodatud.",
-  description: "Kolmainu koguduse äpp — jumalateenistused, sündmused, annetused",
+  description: "Kolmainu koguduse äpp - jumalateenistused, sündmused, annetused",
   logoUrl: "/icons/logo.png",
   theme: {},
   contact: {
@@ -248,7 +248,7 @@ export const seedPages: SitePage[] = [
     title: "Meditatsioon",
     subtitle: "Vaikuse ja palve hetked kiriku rüpes.",
     intro:
-      "Meditatsioon on aja andmine iseendale ja Jumalale. Ei ole vaja oskusi ega ettevalmistust — tule nii, nagu oled, ja jää hetkeks vaikseks.\n\nKirik on argipäeviti avatud vaikseks palveks. Altari ees põleb küünal ja igaüks võib istuda nii kaua, kui vaja.",
+      "Meditatsioon on aja andmine iseendale ja Jumalale. Ei ole vaja oskusi ega ettevalmistust - tule nii, nagu oled, ja jää hetkeks vaikseks.\n\nKirik on argipäeviti avatud vaikseks palveks. Altari ees põleb küünal ja igaüks võib istuda nii kaua, kui vaja.",
     sections: [
       {
         id: "med-hetked",
@@ -268,7 +268,7 @@ export const seedPages: SitePage[] = [
         kind: "prose",
         anchor: null,
         body:
-          "Istu mugavalt, lase õlgadel langeda ja hinga paar korda sügavalt sisse ning välja. Sulge silmad või vaata ühte punkti — küünlaleeki, risti, akent.\n\nVali üks lühike lause, mida kordad vaikselt: \"Issand, halasta\" või \"Sina oled minuga\". Kui mõtted rändavad, too end lauseni tagasi. Alusta viiest minutist ja pikenda nii, nagu tundub loomulik.",
+          "Istu mugavalt, lase õlgadel langeda ja hinga paar korda sügavalt sisse ning välja. Sulge silmad või vaata ühte punkti - küünlaleeki, risti, akent.\n\nVali üks lühike lause, mida kordad vaikselt: \"Issand, halasta\" või \"Sina oled minuga\". Kui mõtted rändavad, too end lauseni tagasi. Alusta viiest minutist ja pikenda nii, nagu tundub loomulik.",
         items: [],
       },
     ],

@@ -83,7 +83,7 @@ export function SettingsForm({ values }: { values: Values }) {
             className={inputClass}
           />
         </FieldShell>
-        <FieldShell label="Domeen" help="Nt kolmainu.ee — seob selle koguduse aadressiga" htmlFor="domain">
+        <FieldShell label="Domeen" help="Nt kolmainu.ee - seob selle koguduse aadressiga" htmlFor="domain">
           <input id="domain" name="domain" defaultValue={values.domain} className={inputClass} />
         </FieldShell>
       </Group>

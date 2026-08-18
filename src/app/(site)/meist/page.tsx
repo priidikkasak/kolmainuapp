@@ -31,9 +31,23 @@ export default async function MeistPage() {
               href={contact.mapsUrl}
               target="_blank"
               rel="noopener"
-              className="mt-3 flex items-center justify-center bg-surface rounded-[14px] px-5 py-[16px] text-[15px] font-medium text-ink transition-transform active:scale-[0.99]"
+              className="mt-3 flex min-h-[54px] items-center justify-center gap-2 rounded-[14px] bg-ink px-5 text-[16px] font-semibold tracking-tight text-bg shadow-[0_8px_22px_-8px_rgba(13,11,8,0.55)] transition-transform active:scale-[0.98]"
             >
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                className="h-[19px] w-[19px]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20 10c0 5.2-6.2 11-8 11S4 15.2 4 10a8 8 0 1 1 16 0z" />
+                <circle cx="12" cy="10" r="2.6" />
+              </svg>
               Ava kaardil
+              <span className="sr-only">(avaneb uues aknas)</span>
             </a>
           ) : null}
         </Section>

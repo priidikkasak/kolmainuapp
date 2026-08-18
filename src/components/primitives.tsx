@@ -103,7 +103,7 @@ export function InfoRow({
   variant?: "account";
 }) {
   return (
-    <div className="grid grid-cols-[88px_1fr] items-baseline gap-3 px-5 py-[18px] bg-surface rounded-[14px]">
+    <div className="grid grid-cols-[64px_1fr] items-baseline gap-3 px-[18px] py-[18px] bg-surface rounded-[14px]">
       <div className="text-[13px] font-medium text-ink-3 tracking-tight">{label}</div>
       <div
         className={`min-w-0 text-[15px] font-medium text-ink leading-[1.5] [overflow-wrap:anywhere] ${

@@ -13,8 +13,6 @@ type Values = {
   tagline: string;
   description: string;
   logoUrl: string;
-  homeTitle: string;
-  homeSubtitle: string;
   domain: string;
   contact: TenantContact;
   theme: TenantTheme;
@@ -87,25 +85,6 @@ export function SettingsForm({ values }: { values: Values }) {
         </FieldShell>
         <FieldShell label="Domeen" help="Nt kolmainu.ee — seob selle koguduse aadressiga" htmlFor="domain">
           <input id="domain" name="domain" defaultValue={values.domain} className={inputClass} />
-        </FieldShell>
-      </Group>
-
-      <Group title="Avaleht">
-        <FieldShell label="Tervitus" htmlFor="homeTitle">
-          <input
-            id="homeTitle"
-            name="homeTitle"
-            defaultValue={values.homeTitle}
-            className={inputClass}
-          />
-        </FieldShell>
-        <FieldShell label="Alapealkiri" htmlFor="homeSubtitle">
-          <input
-            id="homeSubtitle"
-            name="homeSubtitle"
-            defaultValue={values.homeSubtitle}
-            className={inputClass}
-          />
         </FieldShell>
       </Group>
 

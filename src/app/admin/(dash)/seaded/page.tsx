@@ -16,8 +16,6 @@ export default async function SettingsPage() {
           tagline: tenant.tagline ?? "",
           description: tenant.description ?? "",
           logoUrl: tenant.logoUrl ?? "",
-          homeTitle: tenant.homeTitle ?? "",
-          homeSubtitle: tenant.homeSubtitle ?? "",
           domain: tenant.domain ?? "",
           contact: tenant.contact ?? {},
           theme: tenant.theme ?? {},

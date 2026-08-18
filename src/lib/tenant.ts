@@ -55,8 +55,6 @@ export function toSiteConfig(tenant: Tenant): SiteConfig {
     tagline: tenant.tagline,
     description: tenant.description,
     logoUrl: tenant.logoUrl,
-    homeTitle: tenant.homeTitle ?? "Tere tulemast",
-    homeSubtitle: tenant.homeSubtitle,
     theme: tenant.theme ?? {},
     contact: tenant.contact ?? {},
   };

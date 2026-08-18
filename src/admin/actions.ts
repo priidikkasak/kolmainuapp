@@ -132,8 +132,6 @@ export async function saveSettingsAction(
       tagline: text("tagline"),
       description: text("description"),
       logoUrl: text("logoUrl"),
-      homeTitle: text("homeTitle"),
-      homeSubtitle: text("homeSubtitle"),
       domain: text("domain"),
       contact,
       theme,

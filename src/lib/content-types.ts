@@ -98,8 +98,6 @@ export type SiteConfig = {
   tagline: string | null;
   description: string | null;
   logoUrl: string | null;
-  homeTitle: string;
-  homeSubtitle: string | null;
   theme: TenantTheme;
   contact: TenantContact;
 };

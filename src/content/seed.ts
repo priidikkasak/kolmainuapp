@@ -45,8 +45,6 @@ export const seedConfig: SiteConfig = {
   tagline: "Oled oodatud.",
   description: "Kolmainu koguduse äpp — jumalateenistused, sündmused, annetused",
   logoUrl: "/icons/logo.png",
-  homeTitle: "Tere tulemast",
-  homeSubtitle: "Oled oodatud.",
   theme: {},
   contact: {
     phone: "324 3928",

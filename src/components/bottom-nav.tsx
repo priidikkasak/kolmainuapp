@@ -15,29 +15,6 @@ const items = [
     ),
   },
   {
-    key: "kalender",
-    href: "/kalender",
-    label: "Kalender",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="5" width="18" height="16" rx="2" />
-        <path d="M3 10h18M8 3v4M16 3v4" />
-      </svg>
-    ),
-  },
-  {
-    key: "jutlused",
-    href: "/jutlused",
-    label: "Jutlused",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
-        <path d="M4 17c0 1.1.9 2 2 2h1v-6H6a2 2 0 0 0-2 2v2z" />
-        <path d="M20 17c0 1.1-.9 2-2 2h-1v-6h1a2 2 0 0 1 2 2v2z" />
-      </svg>
-    ),
-  },
-  {
     key: "piibel",
     href: "/piibel",
     label: "Piibel",
@@ -76,7 +53,7 @@ export function BottomNav({ background }: { background: string }) {
         paddingBottom: "env(safe-area-inset-bottom)",
       }}
     >
-      <div className="mx-auto grid max-w-[520px] grid-cols-5 h-[76px] px-1">
+      <div className="mx-auto grid max-w-[520px] grid-cols-3 h-[76px] px-1">
         {items.map((it) => {
           const active = isActive(it.href);
           return (

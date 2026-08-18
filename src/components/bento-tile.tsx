@@ -16,7 +16,7 @@ export function BentoTile({
     <Link
       href={href}
       prefetch
-      className="relative isolate aspect-square rounded-[22px] overflow-hidden bg-surface transition-transform active:scale-[0.98]"
+      className="relative isolate h-full min-h-[150px] rounded-[22px] overflow-hidden bg-surface transition-transform active:scale-[0.98]"
     >
       <Image
         src={image}

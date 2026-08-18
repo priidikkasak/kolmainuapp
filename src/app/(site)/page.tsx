@@ -14,7 +14,7 @@ export default async function Home() {
           "calc(100dvh - 90px - 116px - env(safe-area-inset-top) - env(safe-area-inset-bottom))",
       }}
     >
-      <div className="grid grid-cols-2 gap-2.5">
+      <div className="grid flex-1 auto-rows-fr grid-cols-2 gap-2.5">
         {tiles.map((tile, i) => (
           <BentoTile
             key={tile.id}
@@ -29,7 +29,7 @@ export default async function Home() {
       <Link
         href="/anneta"
         prefetch
-        className="mt-2.5 flex w-full flex-1 min-h-[72px] items-center justify-center gap-2.5 rounded-[22px] border-[3px] border-ink px-5 text-[18px] font-semibold tracking-tight text-ink transition-transform active:scale-[0.98]"
+        className="mt-2.5 flex h-[64px] w-full shrink-0 items-center justify-center gap-2.5 rounded-[22px] border-[3px] border-ink px-5 text-[18px] font-semibold tracking-tight text-ink transition-transform active:scale-[0.98]"
       >
         <svg
           viewBox="0 0 24 24"

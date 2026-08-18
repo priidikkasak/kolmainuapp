@@ -103,10 +103,12 @@ export function InfoRow({
   variant?: "account";
 }) {
   return (
-    <div className="grid grid-cols-[minmax(72px,110px)_1fr] gap-3 items-baseline px-5 py-[18px] bg-surface rounded-[14px]">
-      <div className="min-w-0 text-[13px] font-medium text-ink-3 tracking-tight">{label}</div>
+    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 px-5 py-[18px] bg-surface rounded-[14px]">
+      <div className="w-[110px] shrink-0 text-[13px] font-medium text-ink-3 tracking-tight">
+        {label}
+      </div>
       <div
-        className={`min-w-0 text-[15px] font-medium text-ink leading-[1.5] [overflow-wrap:anywhere] ${
+        className={`min-w-0 grow text-[15px] font-medium text-ink leading-[1.5] [overflow-wrap:anywhere] ${
           variant === "account" ? "text-[13px] tabular-nums tracking-tight" : ""
         }`}
       >

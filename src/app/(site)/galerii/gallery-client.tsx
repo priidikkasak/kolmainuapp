@@ -44,13 +44,15 @@ export function GalleryClient({ groups }: { groups: Group[] }) {
           const startIndex = flatOffset;
           flatOffset += group.photos.length;
           return (
-            <section key={group.title}>
-              <div className="text-[17px] font-semibold text-ink tracking-[-0.02em] mb-3">
-                {group.title}
-                <span className="ml-2 text-[13px] font-medium text-ink-3">
-                  {group.count}
-                </span>
-              </div>
+            <section key={group.title || "feed"}>
+              {group.title ? (
+                <div className="text-[17px] font-semibold text-ink tracking-[-0.02em] mb-3">
+                  {group.title}
+                  <span className="ml-2 text-[13px] font-medium text-ink-3">
+                    {group.count}
+                  </span>
+                </div>
+              ) : null}
               <div className="grid grid-cols-3 gap-1.5">
                 {group.photos.map((p, i) => {
                   const absIndex = startIndex + i;

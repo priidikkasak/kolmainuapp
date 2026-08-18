@@ -1,5 +1,6 @@
 import type {
   GalleryGroup,
+  GalleryPhoto,
   HomeTile,
   NewsItem,
   Sermon,
@@ -225,6 +226,12 @@ const galleryCategories = [
   { slug: "statues", title: "Skulptuurid ja detailid", count: 12 },
   { slug: "people", title: "Kogudus", count: 5 },
 ];
+
+/** Igapäevaelu feed — the same shots the congregation posts on Instagram. */
+export const seedDailyPhotos: GalleryPhoto[] = Array.from({ length: 5 }, (_, i) => ({
+  src: `/gallery/people/${i + 1}.jpeg`,
+  alt: `Koguduse igapäev ${i + 1}`,
+}));
 
 export const seedGallery: GalleryGroup[] = galleryCategories.map((cat) => ({
   id: cat.slug,

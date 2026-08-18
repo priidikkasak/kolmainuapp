@@ -17,6 +17,7 @@ import {
 import { currentTenant } from "@/lib/tenant";
 import {
   seedEvents,
+  seedDailyPhotos,
   seedGallery,
   seedHomeTiles,
   seedNews,
@@ -28,6 +29,7 @@ import {
 import type {
   EventKind,
   GalleryGroup,
+  GalleryPhoto,
   HomeTile,
   NewsItem,
   Sermon,
@@ -189,6 +191,28 @@ function toVerse(r: typeof verses.$inferSelect): Verse {
   return { id: r.id, text: r.text, reference: r.reference, imageUrl: r.imageUrl };
 }
 
+/** Gallery category the Igapäevaelu feed reads from; kept out of the gallery page. */
+export const DAILY_SLUG = "igapaevaelu";
+
+export const getDailyPhotos = cache(async (): Promise<GalleryPhoto[]> => {
+  const s = await scope();
+  if (!s) return seedDailyPhotos;
+  const [cat] = await s.db
+    .select()
+    .from(galleryCategories)
+    .where(and(eq(galleryCategories.tenantId, s.tenantId), eq(galleryCategories.slug, DAILY_SLUG)))
+    .limit(1);
+  if (!cat) return seedDailyPhotos;
+  const imgs = await s.db
+    .select()
+    .from(galleryImages)
+    .where(eq(galleryImages.categoryId, cat.id))
+    .orderBy(asc(galleryImages.sortOrder));
+  return imgs.length
+    ? imgs.map((i) => ({ src: i.url, alt: i.alt ?? cat.title }))
+    : seedDailyPhotos;
+});
+
 export const getGallery = cache(async (): Promise<GalleryGroup[]> => {
   const s = await scope();
   if (!s) return seedGallery;
@@ -197,13 +221,14 @@ export const getGallery = cache(async (): Promise<GalleryGroup[]> => {
     .from(galleryCategories)
     .where(and(eq(galleryCategories.tenantId, s.tenantId), eq(galleryCategories.published, true)))
     .orderBy(asc(galleryCategories.sortOrder));
-  if (!cats.length) return seedGallery;
+  const visible = cats.filter((c) => c.slug !== DAILY_SLUG);
+  if (!visible.length) return seedGallery;
   const imgs = await s.db
     .select()
     .from(galleryImages)
     .where(eq(galleryImages.tenantId, s.tenantId))
     .orderBy(asc(galleryImages.sortOrder));
-  return cats
+  return visible
     .map((cat) => ({
       id: cat.id,
       title: cat.title,

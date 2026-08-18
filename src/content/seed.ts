@@ -228,10 +228,13 @@ const galleryCategories = [
 ];
 
 /** Igapäevaelu feed — the same shots the congregation posts on Instagram. */
-export const seedDailyPhotos: GalleryPhoto[] = Array.from({ length: 5 }, (_, i) => ({
-  src: `/gallery/people/${i + 1}.jpeg`,
-  alt: `Koguduse igapäev ${i + 1}`,
-}));
+export const seedDailyPhotos: GalleryPhoto[] = [
+  ...Array.from({ length: 5 }, (_, i) => ({
+    src: `/gallery/people/${i + 1}.jpeg`,
+    alt: `Koguduse igapäev ${i + 1}`,
+  })),
+  { src: "/gallery/orel/1.jpeg", alt: "Orel kirikusaalis" },
+];
 
 export const seedGallery: GalleryGroup[] = galleryCategories.map((cat) => ({
   id: cat.slug,
